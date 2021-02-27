@@ -1,0 +1,19 @@
+{
+	"ques" : [
+	"1.Ce planeta mai este cunoscuta ca fiind denumita „Planeta Rosie”?",
+	"2.Cine este inventatorul re?elei de socializare Facebook?",
+	"3.Care este cel mai populat ora? din lume?",
+	"4.Ce ?ara este supranumita „?ara soarelui rasare”?",
+	"5.Andorra se afla la grani?a caror state?"
+	],
+
+	"options" : [
+	["aurel", "coste", "abla", "bebe"],
+	["aurel", "coste", "abla", "bebe"],
+	["aurel", "coste", "abla", "bebe"],
+	["aurel", "coste", "abla", "bebe"],
+	["mamaie", "tataie", "tata", "mama"],
+
+	"ans" : [ 1, 2, 3, 4, 1 ]
+
+}
