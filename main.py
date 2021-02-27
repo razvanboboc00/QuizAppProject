@@ -5,8 +5,7 @@ import image
 from PIL import Image, ImageTk
 from tkinter import *
 import json
-import random
-
+import time
 
 # FirstPage
 
@@ -17,12 +16,13 @@ window.resizable(False, False)
 
 
 # FirstPage Title
-def question(qn):
-    title = tk.Label(window, text="Test de cultura generala", width=50, bg="purple", fg="blue",
+def question(title):
+    title = tk.Label(window, text="Test de cultura generala", width=50, bg="chocolate1", fg="gold",
                      font=("times", 20, "bold"))
     title.place(x=0, y=1)
 
 
+# Fp Title
 class Title:
     def __init__(self):
         self.qn = 0
@@ -40,30 +40,31 @@ def loginPage(logdata):
     user_name = StringVar()
     password = StringVar()
 
-    login_canvas = Canvas(login_page, width=720, height=440, bg="#B64D4D")
+    login_canvas = Canvas(login_page, width=720, height=440, bg="PaleVioletRed1")
     login_canvas.pack()
 
-    login_frame = Frame(login_canvas, bg="orange")
+    login_frame = Frame(login_canvas, bg="PaleVioletRed2")
     login_frame.place(relwidth=0.8, relheight=0.8, relx=0.1, rely=0.1)
 
-    heading = Label(login_frame, text="Conectare", fg="white", bg="orange")
+    heading = Label(login_frame, text="Conectare", fg="white", bg="PaleVioletRed2")
     heading.config(font='calibri 40')
     heading.place(relx=0.34, rely=0.1)
 
-    # USER NAME
-    ulabel = Label(login_frame, text="Nume de utilizator", fg='white', bg='black')
+    # USERNAME
+    ulabel = Label(login_frame, text="Nume de utilizator", fg='white', bg='VioletRed1')
     ulabel.place(relx=0.1, rely=0.4)
     uname = Entry(login_frame, bg='white', fg='black', textvariable=user_name)
     uname.config(width=42)
     uname.place(relx=0.31, rely=0.4)
 
     # PASSWORD
-    plabel = Label(login_frame, text="Parola", fg='white', bg='black')
+    plabel = Label(login_frame, text="Parola", fg='white', bg='VioletRed1')
     plabel.place(relx=0.1, rely=0.5)
     passwd = Entry(login_frame, bg='white', fg='black', textvariable=password, show="*")
     passwd.config(width=42)
     passwd.place(relx=0.31, rely=0.5)
 
+    # CHECK CREDENTIALS
     def check():
         for a, b, c, d in logdata:
             if b == uname.get() and c == passwd.get():
@@ -72,16 +73,18 @@ def loginPage(logdata):
                 menu(a)
                 break
         else:
-            error = Label(login_frame, text="Nume de utilizator sau parola gresita!", fg='black', bg='white')
+            error = Label(login_frame, text="Nume de utilizator sau parola gresita!", fg='black', bg='red')
             error.place(relx=0.33, rely=0.7)
 
     # LOGIN BUTTON
-    log = Button(login_frame, text='Conectare', padx=5, pady=5, width=5, command=check, fg="white", bg="black")
+    log = Button(login_frame, text='Conectare', padx=5, pady=5, width=5, command=check, fg="white", bg="VioletRed1")
     log.configure(width=15, height=1, activebackground="#33B5E5", relief=FLAT)
     log.place(relx=0.4, rely=0.6)
 
     login_page.mainloop()
 
+
+# added SignUp
 
 def signUpPage():
     window.destroy()
@@ -95,39 +98,39 @@ def signUpPage():
     passwd = StringVar()
     email = StringVar()
 
-    sup_canvas = Canvas(signup_page, width=720, height=440, bg="#FFBC25")
+    sup_canvas = Canvas(signup_page, width=720, height=440, bg="PaleTurquoise1")
     sup_canvas.pack()
 
-    sup_frame = Frame(sup_canvas, bg="#BADA55")
+    sup_frame = Frame(sup_canvas, bg="PaleTurquoise3")
     sup_frame.place(relwidth=0.8, relheight=0.8, relx=0.1, rely=0.1)
 
-    heading = Label(sup_frame, text="Inregistrare", fg="#FFA500", bg="#BADA55")
+    heading = Label(sup_frame, text="Inregistrare", fg="snow", bg="PaleTurquoise3")
     heading.config(font='calibri 40')
     heading.place(relx=0.3, rely=0.1)
 
     # full name
-    flabel = Label(sup_frame, text="Nume complet", fg='white', bg='black')
+    flabel = Label(sup_frame, text="Nume complet", fg='white', bg='gray61')
     flabel.place(relx=0.15, rely=0.4)
     fname = Entry(sup_frame, bg='white', fg='black', textvariable=fname)
     fname.config(width=42)
     fname.place(relx=0.31, rely=0.4)
 
     # username
-    ulabel = Label(sup_frame, text="Nume utilizator", fg='white', bg='black')
+    ulabel = Label(sup_frame, text="Nume utilizator", fg='white', bg='gray61')
     ulabel.place(relx=0.15, rely=0.5)
     uname = Entry(sup_frame, bg='white', fg='black', textvariable=uname)
     uname.config(width=42)
     uname.place(relx=0.31, rely=0.5)
 
     # password
-    plabel = Label(sup_frame, text="Parola", fg='white', bg='black')
+    plabel = Label(sup_frame, text="Parola", fg='white', bg='gray61')
     plabel.place(relx=0.15, rely=0.6)
     pas = Entry(sup_frame, bg='white', fg='black', textvariable=passwd, show="*")
     pas.config(width=42)
     pas.place(relx=0.31, rely=0.6)
 
     # email
-    elabel = Label(sup_frame, text="Email", fg='white', bg='black')
+    elabel = Label(sup_frame, text="Email", fg='white', bg='gray61')
     elabel.place(relx=0.15, rely=0.7)
     email = Entry(sup_frame, bg='white', fg='black', textvariable=email)
     email.config(width=42)
@@ -184,17 +187,19 @@ def signUpPage():
         loginPage(z)
 
     # signup BUTTON
-    sp = Button(sup_frame, text='Creare', padx=5, pady=5, width=5, command=addUserToDataBase, bg="black", fg="white")
+    sp = Button(sup_frame, text='Creare', padx=5, pady=5, width=5, command=addUserToDataBase, bg="gray61", fg="white")
     sp.configure(width=15, height=1, activebackground="#33B5E5", relief=FLAT)
     sp.place(relx=0.4, rely=0.8)
 
-    log = Button(sup_frame, text='Aveti deja un cont?', padx=5, pady=5, width=5, command=gotoLogin, bg="#BADA55",
-                 fg="black")
+    log = Button(sup_frame, text='Aveti deja un cont?', padx=5, pady=5, width=5, command=gotoLogin, bg="gray61",
+                 fg="white")
     log.configure(width=16, height=1, activebackground="#33B5E5", relief=FLAT)
     log.place(relx=0.393, rely=0.9)
 
     signup_page.mainloop()
 
+
+# added Menu
 
 def menu(name):
     login_page.destroy()
@@ -205,13 +210,13 @@ def menu(name):
     menu_canvas = Canvas(menu, width=800, height=600, bg="orange")
     menu_canvas.pack()
 
-    wel = Label(menu_canvas, text=' Acesta este un test de cultura generala. ', fg="blue", bg="orange")
+    wel = Label(menu_canvas, text=' Acesta este un test de cultura generala. ', fg="gray25", bg="orange")
     wel.config(font='Broadway 22')
     wel.place(relx=0.15, rely=0.02)
 
     name = 'Bine ai venit ' + name
-    level34 = Label(menu_canvas, text=name, bg="orange", font="calibri 18", fg="black")
-    level34.place(relx=0.4, rely=0.15)  # 0.17 0.15
+    level34 = Label(menu_canvas, text=name, bg="orange", font="calibri 18", fg="gray25")
+    level34.place(relx=0.4, rely=0.15)
     img = ImageTk.PhotoImage(file="smile.png")
     menu_canvas.create_image(400, 300, anchor=tk.CENTER, image=img)
 
@@ -221,7 +226,7 @@ def menu(name):
         last.resizable(False, False)
         last.title('Chestionar de intrebari')
 
-        last_canvas = Canvas(last, width=800, height=600, bg="SlateBlue2")
+        last_canvas = Canvas(last, width=800, height=600, bg="CadetBlue1")
         last_canvas.pack()
 
         last_frame = Frame(last_canvas, bg="DarkSlateGray1")
@@ -247,7 +252,7 @@ def menu(name):
                 t = Label(last_frame, text="Chestionar de intrebari", width=55, bg="DarkSlateGray1", fg="dark orange",
                           font="calibri 18")
                 t.place(x=0, y=2)
-                qn = Label(last_frame, text=quest[qn], width=50, font="calibri 16", anchor="w")
+                qn = Label(last_frame, text=quest[qn], width=50, font="calibri 16", anchor="w", bg="PaleTurquoise1")
                 qn.place(x=10, y=75)
                 return qn
 
@@ -257,7 +262,7 @@ def menu(name):
                 yp = 150
                 while val < 4:
                     button = Radiobutton(last_frame, text=" ", variable=self.opt_selected, value=val + 1,
-                                      font=("times", 14))
+                                         font=("times", 14))
                     blank_button.append(button)
                     button.place(x=100, y=yp)
                     val = val + 1
@@ -274,10 +279,10 @@ def menu(name):
 
             def buttons(self):
                 next_button = Button(last_frame, text="Next", command=self.next_btn, bg="green", fg="white",
-                                 font=("times", 16, "bold"))
+                                     font=("times", 16, "bold"))
                 next_button.place(x=200, y=380)
                 quit_button = Button(last_frame, text="Quit", width=10, bg="Red",
-                                    fg="white", font=("times", 16, "bold"), command=last.destroy)
+                                     fg="white", font=("times", 16, "bold"), command=last.destroy)
                 quit_button.place(x=380, y=380)
 
             def checkans(self, qn):
@@ -305,19 +310,19 @@ def menu(name):
         Quiz()
         last.mainloop()
 
-    go_button = Button(menu_canvas, text="Sa incepem", bg="black", fg="white", font="calibri 16", command=navigate)
+    go_button = Button(menu_canvas, text="Sa incepem", bg="gray24", fg="white", font="calibri 16", command=navigate)
     go_button.place(relx=0.425, rely=0.8)
     menu.mainloop()
 
 
 def main():
-    canvas = tk.Canvas(window, width=800, height=520, bg='red')
+    canvas = tk.Canvas(window, width=800, height=525, bg='chocolate2')
     canvas.grid(column=0, row=1)
     img = tk.PhotoImage(file="prima3.png")
-    canvas.create_image(400, 250, anchor=tk.CENTER, image=img)
+    canvas.create_image(400, 260, anchor=tk.CENTER, image=img)
 
-    start_button = Button(window, text="Start test", bg="yellow", fg="black", command=signUpPage)
-    start_button.configure(width=115, height=5, activebackground="#33B5E5", relief=RAISED)
+    start_button = Button(window, text="Start test", bg="chocolate3", fg="navy", command=signUpPage)
+    start_button.configure(width=115, height=5, background="chocolate3")
     start_button.grid(column=0, row=2)
 
     Title()
